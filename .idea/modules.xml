@@ -4,8 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ArrayMinMax/ArrayMinMax.iml" filepath="$PROJECT_DIR$/ArrayMinMax/ArrayMinMax.iml" />
       <module fileurl="file://$PROJECT_DIR$/MADN/MADN.iml" filepath="$PROJECT_DIR$/MADN/MADN.iml" />
+      <module fileurl="file://$PROJECT_DIR$/References/References.iml" filepath="$PROJECT_DIR$/References/References.iml" />
       <module fileurl="file://$PROJECT_DIR$/Rekursion/Rekursion.iml" filepath="$PROJECT_DIR$/Rekursion/Rekursion.iml" />
-      <module fileurl="file://$PROJECT_DIR$/String-Reference/String-Reference.iml" filepath="$PROJECT_DIR$/String-Reference/String-Reference.iml" />
       <module fileurl="file://$PROJECT_DIR$/TUT.iml" filepath="$PROJECT_DIR$/TUT.iml" />
     </modules>
   </component>
