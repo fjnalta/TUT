@@ -4,7 +4,6 @@
 .idea/dictionaries
 .idea/**/dataSources/
 .idea/**/dataSources.ids
-.idea/**/dataSources.xml
 .idea/**/dataSources.local.xml
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
@@ -33,3 +32,7 @@ fabric.properties
 *.tar.gz
 *.rar
 hs_err_pid*
+Würde .idea/inspectionProfiles/ löschen
+Würde .idea/misc.xml löschen
+Würde .idea/modules.xml löschen
+Würde .idea/vcs.xml löschen
