@@ -12,11 +12,12 @@ public class Main {
         // Fill Array with random numbers
         fillArray(array);
 
+        int result = verarbeite(array);
         // Aufgabe 2A
-        System.out.println("Das Ergebnis lautet: " + verarbeite(array));
+        System.out.println("Das Ergebnis lautet: " + result);
 
         // Aufgabe 2B
-        System.out.println("Es gibt " + getAnzGroeßerAls(array, 80) + " größere Zahlen im Array");
+        System.out.println("Es gibt " + getAnzGroeßerAls(array, result) + " größere Zahlen im Array");
 
     }
 
