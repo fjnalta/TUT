@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MADN/MADN.iml" filepath="$PROJECT_DIR$/MADN/MADN.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Rekursion/Rekursion.iml" filepath="$PROJECT_DIR$/Rekursion/Rekursion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/String-Reference/String-Reference.iml" filepath="$PROJECT_DIR$/String-Reference/String-Reference.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TUT.iml" filepath="$PROJECT_DIR$/TUT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ÜB1_Aufgabe2/ÜB1_Aufgabe2.iml" filepath="$PROJECT_DIR$/ÜB1_Aufgabe2/ÜB1_Aufgabe2.iml" />
+    </modules>
+  </component>
+</project>
