@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ArrayMinMax/ArrayMinMax.iml" filepath="$PROJECT_DIR$/ArrayMinMax/ArrayMinMax.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Constructor/Constructor.iml" filepath="$PROJECT_DIR$/Constructor/Constructor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Exceptions/Exceptions.iml" filepath="$PROJECT_DIR$/Exceptions/Exceptions.iml" />
       <module fileurl="file://$PROJECT_DIR$/MADN/MADN.iml" filepath="$PROJECT_DIR$/MADN/MADN.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Recursion/Recursion.iml" filepath="$PROJECT_DIR$/Recursion/Recursion.iml" />
       <module fileurl="file://$PROJECT_DIR$/References/References.iml" filepath="$PROJECT_DIR$/References/References.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Rekursion/Rekursion.iml" filepath="$PROJECT_DIR$/Rekursion/Rekursion.iml" />
       <module fileurl="file://$PROJECT_DIR$/TUT.iml" filepath="$PROJECT_DIR$/TUT.iml" />
     </modules>
   </component>
