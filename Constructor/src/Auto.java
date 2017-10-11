@@ -1,16 +1,19 @@
 public class Auto {
 
     private String color = "";
+
+    public int getKmh() {
+        return kmh;
+    }
+
+    public void setKmh(int kmh) {
+        this.kmh = kmh;
+    }
+
     private int kmh;
     private int tires;
 
-    public Auto() {
-        this.tires = 4;
 
-//        if(this.kmh == 0) {
-//            this.kmh = 500;
-//        }
-    }
 
     public Auto(String color) {
         this();
@@ -18,8 +21,8 @@ public class Auto {
     }
 
     public Auto(int kmh) {
-        this();
-        this.kmh = kmh;
+            this();
+            this.kmh = kmh;
     }
 
 
@@ -29,6 +32,13 @@ public class Auto {
         this.kmh = kmh;
     }
 
+    public Auto() {
+        this.tires = 4;
+
+//        if(this.kmh == 0) {
+//            this.kmh = 500;
+//        }
+    }
 
     @Override
     public String toString() {
