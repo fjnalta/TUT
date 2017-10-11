@@ -17,25 +17,26 @@ public class Spiel {
 
     public Spiel(){
 
+        // create Game
+        this.game = new Spielbrett();
         createGame();
-
-
 
         System.out.println(this.players.size());
 
         setPlayerStartPositions();
 
-        gameLoop();
+
+        Spieler winner = gameLoop();
 
         // End the game
-        System.out.println("ENDE! - Spieler " + whoWonTheGame().toString() + " hat gewonnen");
+        System.out.println("ENDE! - Spieler " + winner.toString() + " hat gewonnen!!111");
 
     }
 
     // Main Loop
     // ---------
 
-    private void gameLoop() {
+    private Spieler gameLoop() {
         // Create the dice
         Würfel dice = new Würfel();
 
@@ -55,7 +56,7 @@ public class Spiel {
             int counter = 1;
 
             for(Spielfigur curFigure : this.players.get(whosTurn - 1).getSpielfigurs()) {
-                System.out.println(counter + ": " + curFigure.getPosition());
+                System.out.println(counter + ": " + curFigure.getPosition().toString());
                 counter++;
             }
 
@@ -77,20 +78,10 @@ public class Spiel {
                 } else if(this.players.get(whosTurn -1).getColor().equals(FarbEnum.red)) {
                     startNumber = 1 - 1;
                 }
-
-                // strike player if there is one
-                if (game.getGameFields()[startNumber].isHasPlayer()) {
-
-                    // TODO - search for the player on field and move him back to start
-                } else {
-
-                    current[0].setPosition(game.getGameFields()[startNumber]);
-                }
-
             }
 
             // check if the player can move
-            if(checkIfPlayerCanMove()) {
+            if(checkIfPlayerCanMove() || move == 6) {
 
                 System.out.println("Bitte wählen Sie die zu rückende Figur aus");
 
@@ -102,20 +93,89 @@ public class Spiel {
                     // check if the figure is already in game
                     boolean isInGame = this.players.get(whosTurn -1).getSpielfigurs()[Integer.parseInt(figureInput) - 1].isValidGameFieldPosition();
 
+
                     if(isInGame) {
-                        //
                         Spielfigur current = this.players.get(whosTurn -1).getSpielfigurs()[Integer.parseInt(figureInput) - 1];
 
-                        Spielfeld currentField = current.getPosition();
+                        // strike player if there is one
+                        if (Spielbrett.getGameFieldPosition(current.getPosition().getId() + move).isHasPlayer()) {
+                            // TODO - search for the player on field and move him back to start
 
+                        } else {
+                            current.setPosition(Spielbrett.getGameFieldPosition(current.getPosition().getId() + move));
+                            System.out.println("Die Figur" + figureInput + " steht nun auf " + current.getPosition());
+
+                        }
 
                     // no Figure in Game
                     } else {
-                            // TODO
+                        // if there is a 6 - start the game
+                        if(move == 6) {
+
+                            Spielfigur current = this.players.get(whosTurn -1).getSpielfigurs()[Integer.parseInt(figureInput) - 1];
+
+                            // different starting zones
+                            if(current.getColor() == FarbEnum.green) {
+                                if(Spielbrett.getGameFieldPosition(21).isHasPlayer()) {
+
+                                    if(searchFigureWithPosition(21).getColor() == FarbEnum.green) {
+                                        Spielfigur deadFigure = searchFigureWithPosition(21);
+                                        backToStart(deadFigure);
+                                    }
+
+                                } else {
+
+                                    current.setPosition(Spielbrett.getGameFieldPosition(21));
+                                    current.setValidGameFieldPosition(true);
+                                    Spielbrett.getGameFieldPosition(21).setHasPlayer(true);
+                                }
+                            } else if(current.getColor() == FarbEnum.blue) {
+                                if(Spielbrett.getGameFieldPosition(11).isHasPlayer()) {
+
+                                    if(searchFigureWithPosition(11).getColor() == FarbEnum.blue) {
+                                        Spielfigur deadFigure = searchFigureWithPosition(11);
+                                        backToStart(deadFigure);
+                                    }
+
+                                } else {
+
+                                    current.setPosition(Spielbrett.getGameFieldPosition(11));
+                                    current.setValidGameFieldPosition(true);
+                                    Spielbrett.getGameFieldPosition(11).setHasPlayer(true);
+                                }
+                            } else if(current.getColor() == FarbEnum.red) {
+                                if(Spielbrett.getGameFieldPosition(1).isHasPlayer()) {
+
+                                    if(searchFigureWithPosition(1).getColor() != FarbEnum.red) {
+                                        Spielfigur deadFigure = searchFigureWithPosition(1);
+                                        backToStart(deadFigure);
+                                    }
+
+                                } else {
+
+                                    current.setPosition(Spielbrett.getGameFieldPosition(1));
+                                    current.setValidGameFieldPosition(true);
+                                    Spielbrett.getGameFieldPosition(1).setHasPlayer(true);
+                                }
+                            } else if(current.getColor() == FarbEnum.yellow) {
+                                if(Spielbrett.getGameFieldPosition(31).isHasPlayer()) {
+
+                                    if(searchFigureWithPosition(31).getColor() != FarbEnum.yellow) {
+                                        Spielfigur deadFigure = searchFigureWithPosition(31);
+                                        backToStart(deadFigure);
+                                    }
+
+                                } else {
+
+                                    current.setPosition(Spielbrett.getGameFieldPosition(31));
+                                    current.setValidGameFieldPosition(true);
+                                    Spielbrett.getGameFieldPosition(31).setHasPlayer(true);
+                                }
+                            }
+                        }
                     }
 
                 } catch (IOException e) {
-                    // TODO - exception handling -> wrong figure input
                     e.printStackTrace();
                 }
 
@@ -131,6 +191,8 @@ public class Spiel {
             // change player
             nextPlayersTurn();
         }
+
+        return this.players.get(whosTurn -1);
     }
 
 
@@ -139,10 +201,45 @@ public class Spiel {
 
     // Managing the Game
 
+    private void configureFigures() {
+
+    }
+
     private void setPlayerStartPositions() {
         for(Spieler curPlayer : this.players) {
             for(int i = 0; i < 4; i++) {
-                curPlayer.getSpielfigurs()[i].setColor(curPlayer.getColor());
+                curPlayer.getSpielfigurs()[i].setPosition(game.getStartFields()[i]);
+
+                System.out.println("Start Positions " + curPlayer.toString() + " is " + curPlayer.getSpielfigurs()[i].getPosition().toString());
+            }
+        }
+    }
+
+    private Spielfigur searchFigureWithPosition(int i) {
+        for(Spieler players : this.players) {
+            for(Spielfigur figure : players.getSpielfigurs()) {
+                if(figure.getPosition().equals(Spielbrett.getGameFieldPosition(i))) {
+                    return figure;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private void backToStart(Spielfigur current) {
+        for(Spieler player : this.players) {
+            if(player.getColor() == current.getColor()) {
+                for(Spielfigur figure : player.getSpielfigurs()) {
+                    if(figure.getPosition() == current.getPosition()) {
+                        for(Spielfeld startField : game.getStartFields()) {
+                            if(!startField.isHasPlayer()) {
+                                figure.setPosition(startField);
+                                figure.setValidGameFieldPosition(false);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -166,6 +263,19 @@ public class Spiel {
         return false;
     }
 
+    private boolean checkIfPlayerHasFiguresInBank() {
+        boolean check = false;
+
+        for(Spielfigur curFigure : this.players.get(whosTurn -1).getSpielfigurs()) {
+            if(curFigure.isValidGameFieldPosition()) {
+                continue;
+            } else {
+                check = true;
+            }
+        }
+        return check;
+    }
+
 
     // Managing the Game status
 
@@ -184,10 +294,6 @@ public class Spiel {
         return false;
     }
 
-    private Spieler whoWonTheGame() {
-        return null;
-    }
-
     // Creating the Game
 
     private void createGame() {
@@ -195,7 +301,7 @@ public class Spiel {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int players = 0;
 
-        System.out.println("Bitte geben Sie die Anzahl an Spielern ein");
+        System.out.println("Bitte geben Sie die Anzahl der Spieler ein");
 
         try {
             players = Integer.parseInt(br.readLine());
@@ -217,9 +323,6 @@ public class Spiel {
             System.out.println("Bitte geben Sie eine gültige Zahl ein");
             e.printStackTrace();
         }
-
-        // create Game
-        this.game = new Spielbrett();
     }
 
     private String setPlayerName() {
@@ -284,6 +387,10 @@ public class Spiel {
 
     private Spieler createPlayer(String name, FarbEnum color) {
         Spieler currentPlayer = new Spieler(name,color);
+        for(int i = 0; i < currentPlayer.getSpielfigurs().length; i ++) {
+
+            currentPlayer.getSpielfigurs()[i] = new Spielfigur(currentPlayer.getColor(),game.getStartFields()[i]);
+        }
         this.players.add(currentPlayer);
 
         return currentPlayer;

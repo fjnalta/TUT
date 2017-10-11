@@ -12,8 +12,17 @@ public class Spieler {
         this.name = name;
         this.color = color;
         this.spielfigurs = new Spielfigur[4];
-        this.würfel = new Würfel();
 
+
+        this.würfel = new Würfel();
+        configureFigures();
+
+    }
+
+    private void configureFigures() {
+        for(int i = 0; i < spielfigurs.length; i ++) {
+            spielfigurs[i] = new Spielfigur(this.color,null);
+        }
     }
 
     public FarbEnum getColor() {
